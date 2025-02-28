@@ -5,6 +5,8 @@ on:
     branches:
       - master
 
+  workflow_dispatch:
+
 jobs:
   build:
     name: Development build
@@ -33,11 +35,11 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew assembleRelease --stacktrace
 
-      # - name: Upload APK
-      #   uses: actions/upload-artifact@v3
-      #   with:
-      #     name: AdAway-dev
-      #     path: app/build/outputs/apk/release/app-release-unsigned.apk
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: AdAway-dev
+          path: app/build/outputs/apk/release/app-release-unsigned.apk
       
       - name: Update dependency graph
         uses: mikepenz/gradle-dependency-submission@v0.8.5 # Deprecated: need to be changed
